@@ -6,12 +6,7 @@ import {IERC20} from "forge-std/interfaces/IERC20.sol";
 import {console} from "forge-std/console.sol";
 
 import {IPolygonZkEVMBridgeV2} from "@zkevm/v2/interfaces/IPolygonZkEVMBridgeV2.sol";
-
-interface IBridgeV2 is IPolygonZkEVMBridgeV2 {
-    function tokenInfoToWrappedToken(
-        bytes32 tokenInfoHash
-    ) external view returns (address);
-}
+import {IBridge} from "src/IBridge.sol";
 
 // forge script script/GetBridgeWrappedAddress.s.sol:GetBWATokenddress --rpc-url https://zkevm-rpc.com -vvvvv
 contract GetBWATokenddress is Script {
@@ -31,7 +26,7 @@ contract GetBWATokenddress is Script {
         bytes32 tokenInfoHash = keccak256(
             abi.encodePacked(originNetwork, originTokenAddress)
         );
-        bwTokenAddr = IBridgeV2(_BRIDGE_ADDR).tokenInfoToWrappedToken(
+        bwTokenAddr = IBridge(_BRIDGE_ADDR).tokenInfoToWrappedToken(
             tokenInfoHash
         );
         console.log("does the bridge wrapped token exist?");
