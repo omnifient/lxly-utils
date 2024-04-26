@@ -13,6 +13,10 @@ interface IBridge is IPolygonZkEVMBridgeV2 {
         bytes32 tokenInfoHash
     ) external view returns (address);
 
+    function wrappedTokenToTokenInfo(
+        address destinationAddress
+    ) external view returns (uint32, address);
+
     function getLeafValue(
         uint8 leafType,
         uint32 originNetwork,
@@ -29,4 +33,14 @@ interface IBridge is IPolygonZkEVMBridgeV2 {
         uint32 index,
         bytes32 root
     ) external pure returns (bool);
+
+    function getTokenMetadata(
+        address token
+    ) external view returns (bytes memory);
+
+    function lastUpdatedDepositCount() external view returns (uint32);
+
+    function depositCount() external view returns (uint256);
+
+    function networkID() external view returns (uint32);
 }

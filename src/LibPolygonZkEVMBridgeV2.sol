@@ -6,7 +6,7 @@ import {IERC20MetadataUpgradeable} from "@oz-contracts-upgradeable/token/ERC20/e
 library LibPolygonZkEVMBridgeV2 {
     function getTokenMetadata(
         address token
-    ) public view returns (bytes memory) {
+    ) internal view returns (bytes memory) {
         return
             abi.encode(safeName(token), safeSymbol(token), safeDecimals(token));
     }
